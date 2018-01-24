@@ -154,7 +154,7 @@ content2.N is content that does not require custom weights, and they share equal
 
 Example:
 
-`` `
+```
 face = [
     ['_', 0.8], # expressionless 80%
     ['😀', 0.05], # This expression represents 5%
@@ -167,7 +167,7 @@ face = [
     '😊',
     '🙂'
 ]
-`` `
+```
 
 ### Restrictions
 We offer you the function to identify whether there is a constraint between components.  
@@ -214,13 +214,13 @@ lexicon = {
 Assuming that the names of the two component libraries are lexicon1 and lexicon2 respectively, the description table created needs to be named lexicon1VSlexicon2.
 The contents of the table are as follows:
 
-`` `
+```
 lexicon1VSlexicon2 = [
     'property1_of_lexicon1': [the_list_of_lexicon2_properties, ...],
     'property2_of_lexicon1': [the_list_of_lexicon2_properties, ...],
     'property3_of_lexicon1': [the_list_of_lexicon2_properties, ...]
 ]
-`` `
+```
 
 #### Describe the relationship between the descriptive table information in the component library
 Need to increase in the conditions section of lexicon1: `'lexicon2': 'lexicon1VSlexicon2'`  
