@@ -1,0 +1,371 @@
+# 基础设置
+totalNumbers = 100
+logging.basicConfig(level=logging.INFO)
+
+
+device = {
+    'conditions':{
+        'placeInHome': 'deviceVSPlaceInHome',
+        'purpose': 'deviceVSPurpose'
+    },
+    'v':{
+        '插座':['p', 0.2], # plugin
+        '电量统计插座':['p', 0.05],
+        '墙面开关':['p', 0.03],
+        '球泡灯':['b', 0.15], # bulb
+        '彩灯':'b',
+        '吸顶灯':'b',
+        '灯带':'b',
+        '空调':'c', # circumstance
+        '空气净化器':'c',
+        '电风扇':'c',
+        '净水器':'k', # kitchen
+        '冲奶机':'k',
+        '面包机':'k',
+        '家用摄像机':'s', # 安全
+        '门磁':'s'
+    }
+}
+
+source = [
+    '亚马逊',
+    'ebuy',
+    '{position}的{market}',
+    '网上',
+    '{market}'
+]
+position = [
+    '门口',
+    '不远处',
+    '市中心',
+    '常去',
+    '朋友推荐'
+]
+market = [
+    '超市',
+    '家电卖场',
+    '宜家',
+    '商店',
+    '沃尔玛',
+]
+
+placeInHome = {
+    'conditions':{
+        'device': 'deviceVSPlaceInHome',
+        'traditionalDevice': 'placeInHomeVStraditionalDevice'
+    },
+    'v':{
+        '客厅':'l',
+        '厨房':'k',
+        '卧室':'b',
+        '书房':'s',
+        '楼上':'u',
+        '楼下':'d',
+        '卫生间':'w'
+    }
+}
+
+deviceVSPlaceInHome = {
+    'p': ['l', 'k', 'b', 's', 'u', 'd', 'w'],
+    'b': ['l', 'k', 'b', 's', 'u', 'd', 'w'],
+    'c': ['l', 'k', 'b', 's', 'u', 'd'],
+    'k': ['k', 'u', 'd'],
+    's': ['l', 'k', 'b', 's', 'u', 'd']
+}
+
+purpose = {
+    'conditions':{
+        'device': 'deviceVSPurpose'
+    },
+    'v':{
+        '控制{traditionalDevice}':'p',
+        '调节氛围':'b',
+        '根据不同情境调节灯光':'b',
+        '跟着日光自动调整开关':'b',
+        '让环境更加舒适': 'c',
+        '让做饭变得更有趣':'k',
+        '帮助我做出更可口的饭菜':'k',
+        '保证家庭安全':'s',
+        '在我离开时能够帮我看家护院':'s',
+        '远程控制':'g',
+        '定时执行任务':'g',
+        '保证家庭安全':'g',
+        '让我无需为家中的设备操心':'g',
+        '体验不同的生活方式':'g'
+    }
+}
+deviceVSPurpose = {
+    'p': ['p', 'g'],
+    'b': ['b', 'g'],
+    'c': ['c', 'g'],
+    's': ['s', 'g'],
+    'k': ['k', 'g']
+}
+
+traditionalDevice = {
+    'conditions':{
+        'placeInHome': 'placeInHomeVStraditionalDevice'
+    },
+    'v':{
+        '电视':'t',
+        '热水器':'h',
+        '灯':'b',
+        '电器':'e'
+    }
+}
+
+placeInHomeVStraditionalDevice = {
+    'l': ['t', 'b', 'e'],
+    'k': ['b','e'],
+    'b': ['t', 'b', 'e'],
+    's': ['t', 'b', 'e'],
+    'u': ['t', 'b', 'e', 'h'],
+    'd': ['t', 'b', 'e', 'h'],
+    'w': ['t', 'h', 'b', 'e']
+
+}
+
+good = [
+    '完美',
+    '简单',
+    '方便',
+    '好用',
+    '高效',
+    '好玩',
+    '极客',
+    '让人感叹',
+    '稳定',
+    '出色',
+    '精致',
+    '优雅'
+]
+
+right = [
+    '幸运',
+    '正确',
+    '完美',
+    '令人满意'
+]
+adv = [
+    '很',
+    '实在是',
+    '从未如此',
+    '真是',
+    '迄今为止最',
+    '是我见过最',
+    '是我用过最',
+    '无比'
+]
+shortComment = [
+    ['{adv}{good}的', 0.40],
+    ['我的{toWhom}对它的评价是非常{good}', 0.10],
+    ['我的{toWhom}非常喜欢', 0.10],
+    ['一个{right}的决定', 0.05],
+    '完全超出我的期望',
+    '难以置信',
+    '强烈推荐',
+    '物超所值',
+    '不容错过',
+    '赞不绝口'
+]
+
+fromWhom = [
+    '男朋友', '女朋友', '儿子', '女儿', '外孙', '孙子', '孙女', '家人', '好朋友', '同事', '闺蜜', '学生', '邻居'
+]
+
+toWhom = [
+    '男朋友', '女朋友', '父母', '妈妈', '爸爸', '爷爷', '奶奶', '家人', '好朋友'
+]
+
+goodFunction = [
+    '智能场景',
+    '使用{audio}控制',
+    '使用 IFTTT 控制',
+    '定时任务',
+    '设备群组',
+    '远程控制'
+]
+
+basicFunction = [
+    '添加设备',
+    '控制设备',
+    '控制群组',
+    '与家人共享'
+]
+
+favoriteFunction = [
+    '{goodFunction}是我最喜欢的',
+    '{goodFunction}非常{good}',
+    '{goodFunction}深深打动了我',
+    '{basicFunction}非常简单',
+    '在进行{basicFunction}时，体验非常流畅',
+    '不论是{goodFunction}还是{basicFunction}都做的很{good}',
+    '{goodFunction}和{goodFunction}给我带来极大的便利',
+    '如果能够用好{goodFunction}，将会给你的生活带来极大改善',
+    '我以我的人格向你推荐{goodFunction}这个功能',
+    '{basicFunction}是这类产品最大的挑战，而这个应用做得很好',
+    '我现在已经离不开{goodFunction}了',
+    '{device}具有{goodFunction}的功能',
+]
+
+audio = [
+    'Amazon Echo',
+    'Google Home',
+    'Echo',
+    'sound box',
+    'Intelligent sound box',
+    'Echo',
+    'Alexa',
+    '天猫精灵'
+]
+
+sorrow = [
+    '唯一的问题在于{flaw}',
+    '要是可以{suggestion}就更好了',
+    '美中不足的是{flaw}',
+    '我的建议是{suggestion}',
+    '我希望可以{suggestion}',
+    '{flaw}这个问题，虽然不是很严重，但是还是希望能继续完善一下'
+]
+flaw = [
+    '知道的人还太少',
+    '知道的人不够多'
+    '有时会缺货',
+    '支持的智能设备品类还不够全面',
+    '不支持我的手环',
+    '不能控制我之前购买的{opponent}的设备',
+    '没有看到{notSupport}产品',
+    '对平板支持还不够好'
+]
+suggestion = [
+    '通过房间来管理设备',
+    '支持蓝牙 Mesh',
+    '推出更多产品',
+    '对我买过的设备进行智能化',
+    '在 App 中控制{opponent}的产品',
+    '推出一个{notSupport}产品',
+    '对平板进行支持'
+]
+opponent = [
+    'August',
+    'LIFX',
+    'WeMo',
+    'Kasa',
+    'Yeelight',
+    'Bubfi',
+    'Aukey',
+    'iSocket',
+    'Wink',
+    'Meross',
+    'Stringify',
+    'SmartThings',
+    'Yonomi',
+    'Harmony',
+    'Belkin',
+    'Logitech',
+    'Philips',
+    'Withings',
+    'Samsung',
+    'Yeti',
+    'Gideon',
+    'AT&T'
+]
+
+notSupport = [
+    '蓝牙手环',
+    '手环',
+    '智能音箱',
+    '红外遥控器',
+    '智能花盘',
+    '智能电动车'
+]
+
+# 用于锦上添花的部分
+goodService = [
+    '对我提出的问题能够及时服务',
+    '说明书非常简单',
+    '包装很好看',
+    '工业设计很出色',
+]
+
+better = [
+    '比{opponent}家的东西好用多了',
+    '我很喜欢{opponent}的产品，但是这个产品更棒',
+    '这个产品的{goodFunction}比{opponent}要好用',
+    '{opponent}的{basicFunction}还是不如这个产品',
+    '我买过{opponent}、{opponent1}以及{opponent2}的产品，但还是这个更好用一些'
+]
+
+festival = [
+    '圣诞节',
+    '生日',
+    '纪念日'
+]
+
+buyIt = [
+    '{device}是我从{source}买的',
+    '偶然在{source}看到了一个{device}，就买了下来',
+    '新家装修的时候使用了智能设备',
+    '{fromWhom}想我推荐了这个产品',
+    '听了{fromWhom}的建议，我买了一个智能{device}',
+    '{fromWhom}告诉我{device}很不错',
+    '{fromWhom}向我谈起这个 App，我立马就买了这家的产品',
+    '今年{festival}我收到了一个{device}作为礼物',
+    '{fromWhom}帮我买了一个智能{device}',
+    '{fromWhom}在{source}帮我买了一个智能{device}'
+    '{fromWhom}说智能{device}非常好用，并帮我买了一个',
+    '感谢{fromWhom}帮我买的智能{device}',
+    '{fromWhom}送了我一个智能{device}'
+]
+describePurpose = [
+    '{device}用来{purpose}',
+    '为了{purpose}，我买了一个{device}',
+    '我买了{device}，主要是为了{purpose}和{purpose1}',
+    '{device}不仅可以{purpose}，还可以{purpose1}',
+    '{device}被我放在了{placeInHome}',
+    '我把{device}放在{placeInHome}，用来{purpose}',
+    '{device}能够{purpose}，所以我把它放在了{placeInHome}',
+    '{placeInHome}放一个{device}来{purpose}',
+    '{placeInHome}里的{device}可以{purpose}'
+]
+
+symbol = [
+    ['_', 0.5], # 占位符需要处理的
+    '!',
+    '!!',
+    '。',
+]
+
+face = [
+    ['_', 0.8],
+    '😀',
+    '😁',
+    '😄',
+    '😆',
+    '🙂',
+    '😏',
+    '😉',
+    '😊',
+    '🙂'
+]
+
+sentence = [
+    ['{shortComment}{face}{symbol}', 0.15],
+    ['{shortComment}，{shortComment1}{face}{symbol}', 0.06],
+    ['{shortComment}，{better}{face}{symbol}', 0.03],
+    ['{favoriteFunction}，{better}{face}{symbol}', 0.03],
+    ['{shortComment}，{sorrow}', 0.03],
+    ['{favoriteFunction}，{sorrow}', 0.03],
+    ['{buyIt}，{shortComment}，{sorrow}', 0.02],
+    ['{favoriteFunction}，{shortComment}{face}{symbol}', 0.15],
+    ['智能{device}{shortComment}', 0.04],
+    '{favoriteFunction}',
+    '{describePurpose}',
+    '{face}{describePurpose}，{shortComment}{face}',
+    '{describePurpose}{face}，{favoriteFunction}',
+    '{face}{buyIt}，{shortComment}',
+    '{buyIt}，{favoriteFunction}{face}{symbol}',
+    '{buyIt}，{describePurpose}',
+    '{shortComment}，{favoriteFunction}{face}',
+    '{shortComment}，{describePurpose}，{shortComment1}{symbol}'
+]
