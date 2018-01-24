@@ -1,42 +1,42 @@
-中文版见 README_CN.md
-According to some rules, comments are generated automatically.
+中文版见 README_CN.md  
+According to some rules, comments are generated automatically.  
 
 ## basic idea
-** The first step is split: **
-We can split the comment into some standard components, and each standard components can actually be split again, and finally become a very simple rule.
+** The first step is split: **  
+We can split the comment into some standard components, and each standard components can actually be split again, and finally become a very simple rule.  
 E.g:
 
-* {sentence}: The complete sentence, the largest component, may include the following:
-    * {shortComment}: The simplest statement used to express positive emotions
-    * {buyIt}: Where to get our smart hardware
-    * {favoriteFunction}: Describe your favorite features
-    * {sorrow}: Some suggestions, sorry (of course, very fake)
-    * {symbol}: the end of the sentence to express emotions punctuation
-    * {face}: emoji expression
+* {sentence}: The complete sentence, the largest component, may include:
+    * {shortComment}: The simplest statement used to express positive emotions
+    * {buyIt}: Where to get our smart hardware
+    * {favoriteFunction}: Describe your favorite features
+    * {sorrow}: Some suggestions, sorry (of course, very fake)
+    * {symbol}: the end of the sentence to express emotions punctuation
+    * {face}: emoji expression
 
 The {shortComment} can also be split apart, except for some idioms, which can be {adv} {good}, an *adverb* plus a *positive adjective*.
 
-** The second step is to expand: **
+** The second step is to expand: **  
 We expand on each of these components to keep refining every one of them.
 E.g:
 
-{adv} can be expanded to: very, the most, extremely ...
-{good} can be extended to: easy to use, simple, elegant ...
+{adv} can be expanded to: very, the most, extremely ...  
+{good} can be extended to: easy to use, simple, elegant ...  
 
-** The third step is to arrange the combination: **
-That is randomly selected and collocated, with the first two steps of bedding, we can combine a lot of comments.
+** The third step is to arrange the combination: **  
+That is randomly selected and collocated, with the first two steps of bedding, we can combine a lot of comments.  
 We still take {adv} {good} for example:
 
-As above, we have expanded the two thesaurus, after which we randomly select the contents of which can be combined into the following:
-Very easy to use, the most elegant, extremely simple...
+As above, we have expanded the two thesaurus, after which we randomly select the contents of which can be combined into the following:  
+Very easy to use, the most elegant, extremely simple...  
 
 
 ## basic use
-After determining how many comments you need to generate, setting up `totalNumbers` in the config file completes the basic setup.
+After determining how many comments you need to generate, setting up `totalNumbers` in the config file completes the basic setup.  
 After the program execution is completed, the generated comment will appear in the bottom of *comment.txt*.
 
 ## The basic expansion of lexicons
-You can expand the lexicons if you need.
+You can expand the lexicons if you need.  
 In order to adapt to various situations, the specific design is as follows:
 
 ### The most simple case
@@ -49,9 +49,9 @@ lexiconName = [
 ]
 ```
 
-Description:
-lexiconName is lexicon name
-contentN is the contents of the lexicon, note that do not add a comma after the last element
+Description:  
+lexiconName is lexicon name  
+contentN is the contents of the lexicon, note that do not add a comma after the last element  
 
 Example:
 
@@ -66,11 +66,11 @@ adv = [
 ### Quote other lexicons
 The syntax for referencing another lexicon in a lexicon is simple:
 
-`` `
+```
 {lexiconName}
-`` `
+```
 
-The name of the thesaurus wrapped with braces
+The name of the thesaurus wrapped with braces.  
 Example:
 
 ```
@@ -98,7 +98,7 @@ shortComment = [# The pound sign precedes the thesaurus, followed by the pound s
 There are two cases when one component is used more than once in a sentence.
 
 #### Hope that the last one and the previous one is consistent
-A bit similar to the concept of "pronoun", as long as the name is kept the same.
+A bit similar to the concept of "pronoun", as long as the name is kept the same.  
 E.g:
 
 ```
@@ -134,7 +134,7 @@ symbol = [
 ```
 
 ### Custom weight
-In order to be more natural and achieve better results, the probability of different content in the component may be different, at this time can be resolved by custom weights.
+In order to be more natural and achieve better results, the probability of different content in the component may be different, at this time can be resolved by custom weights.  
 Grammar is as follows:
 
 ```
@@ -148,8 +148,8 @@ lexiconName = [
 ]
 ```
 
-Description:
-Content1.N is the need to customize the weight of the content, chanceN that corresponds to the content of the weight (probability).
+Description:  
+Content1.N is the need to customize the weight of the content, chanceN that corresponds to the content of the weight (probability).  
 content2.N is content that does not require custom weights, and they share equally undefined weight.
 
 Example:
@@ -170,10 +170,11 @@ face = [
 `` `
 
 ### Restrictions
-We offer you the function to identify whether there is a constraint between components.
+We offer you the function to identify whether there is a constraint between components.  
 A device such as a **rice cooker** in {device} can only be associated with a **kitchen** location in {placeInHome}, so a separate way to maintain this restriction is needed.
 
-This will be more troublesome, there are three steps:
+This will be more troublesome, there are three steps:   
+
 * Add a property for each of the two related components
 * Add a description of the relationship between the constraints
 * Describe the relationship between the descriptive information recorded in the component library
@@ -194,7 +195,7 @@ lexicon = {
 }
 ```
 
-Note: one property can be attached to more than one content.
+Note: one property can be attached to more than one content.  
 E.g:
 
 ```
@@ -222,12 +223,12 @@ lexicon1VSlexicon2 = [
 `` `
 
 #### Describe the relationship between the descriptive table information in the component library
-Need to increase in the conditions section of lexicon1: `'lexicon2': 'lexicon1VSlexicon2'`
+Need to increase in the conditions section of lexicon1: `'lexicon2': 'lexicon1VSlexicon2'`  
 At the same time in the conditions section lexicon2 increase: `'lexicon1': 'lexicon1VSlexicon2'`
 
 #### Example
 
-`` `
+```
 # The first component library
 device = {
     'conditions': {
@@ -272,10 +273,10 @@ deviceVSPlaceInHome = {
     's': ['l', 'k', 'b', 's', 'u', 'd']
 }
 
-`` `
+```
 
 ### Constraints with weight
-We still take {device} as an example, add the probabilities to the property and wrap the property and probabily in square brackets.
+We still take {device} as an example, add the probabilities to the property and wrap the property and probabily in square brackets.  
 Example:
 
 ```
