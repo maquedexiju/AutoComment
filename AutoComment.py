@@ -1,3 +1,5 @@
+## -*- coding: utf-8 -*-
+
 import random
 import logging
 import re
@@ -9,8 +11,8 @@ import os.path
 basePath = os.path.dirname(sys.argv[0])
 if basePath == '': basePath = '.'
 try:
-    with open(basePath + '/config') as configFile:
-        exec(configFile.read())
+    with open(basePath + '/config', 'rb') as configFile:
+        exec(configFile.read().decode('utf-8'))
 except Exception as e:
     logging.critical(repr(e))
     logging.debug(traceback.print_exc())
@@ -47,7 +49,7 @@ def rand(inputStr, conditions = {}):
 
         # 生成 pool
         if type(eval(reallexicon)) == type(list()):
-            pool = eval(reallexicon)
+            pool = eval(reallexicon).copy()
         else: # 相对复杂的样子
             content = eval(reallexicon)['v']
             for k, v in content.items():
@@ -142,9 +144,9 @@ def rand(inputStr, conditions = {}):
                     s += pool[i][1]
                 else:
                     x += 1
-                print(x)
+                # print(x)
             if x != 0:
-                print(s, x)
+                #print(s, x)
                 step = float((1 - s))/x
             logging.debug('步长为 %f'%step)
 
@@ -344,7 +346,7 @@ def rand(inputStr, conditions = {}):
 
 # 进行生成
 try:
-    with open(basePath + '/comment.txt', 'a') as f:
+    with open(basePath + '/comment.txt', 'a', encoding='utf-8') as f:
         i = 0
         while i < totalNumbers:
             result = rand('{sentence}')

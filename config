@@ -1,6 +1,6 @@
 # 基础设置
-totalNumbers = 100
-logging.basicConfig(level=logging.INFO)
+totalNumbers = 2000
+logging.basicConfig(level=logging.DEBUG)
 
 
 device = {
@@ -200,7 +200,7 @@ favoriteFunction = [
     '{basicFunction}非常简单',
     '在进行{basicFunction}时，体验非常流畅',
     '不论是{goodFunction}还是{basicFunction}都做的很{good}',
-    '{goodFunction}和{goodFunction}给我带来极大的便利',
+    '{goodFunction}和{goodFunction1}给我带来极大的便利',
     '如果能够用好{goodFunction}，将会给你的生活带来极大改善',
     '我以我的人格向你推荐{goodFunction}这个功能',
     '{basicFunction}是这类产品最大的挑战，而这个应用做得很好',

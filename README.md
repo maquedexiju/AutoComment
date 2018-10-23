@@ -1,8 +1,10 @@
 中文版见 README_CN.md  
 According to some rules, comments are generated automatically.  
 
-## basic idea
-** The first step is split: **  
+## Basic Idea
+
+**The first step is split:**  
+
 We can split the comment into some standard components, and each standard components can actually be split again, and finally become a very simple rule.  
 E.g:
 
@@ -16,14 +18,16 @@ E.g:
 
 The {shortComment} can also be split apart, except for some idioms, which can be {adv} {good}, an *adverb* plus a *positive adjective*.
 
-** The second step is to expand: **  
+**The second step is to expand:**  
+
 We expand on each of these components to keep refining every one of them.
 E.g:
 
-{adv} can be expanded to: very, the most, extremely ...  
-{good} can be extended to: easy to use, simple, elegant ...  
+* {adv} can be expanded to: very, the most, extremely ...  
+* {good} can be extended to: easy to use, simple, elegant ...  
 
-** The third step is to arrange the combination: **  
+**The third step is to arrange the combination:**  
+
 That is randomly selected and collocated, with the first two steps of bedding, we can combine a lot of comments.  
 We still take {adv} {good} for example:
 
@@ -31,15 +35,18 @@ As above, we have expanded the two thesaurus, after which we randomly select the
 Very easy to use, the most elegant, extremely simple...  
 
 
-## basic use
+## Basic Use
+
 After determining how many comments you need to generate, setting up `totalNumbers` in the config file completes the basic setup.  
 After the program execution is completed, the generated comment will appear in the bottom of *comment.txt*.
 
-## The basic expansion of lexicons
-You can expand the lexicons if you need.  
+## The Basic Expansion of Lexicons
+
+You can expand the lexicons if you need.
+{sentence} is the final component to be used in the program, all of your modification should be based on this.
 In order to adapt to various situations, the specific design is as follows:
 
-### The most simple case
+### The Most Simple Case
 
 ```
 lexiconName = [
@@ -63,7 +70,7 @@ adv = [
 ]
 ```
 
-### Quote other lexicons
+### Quote Other Lexicons
 The syntax for referencing another lexicon in a lexicon is simple:
 
 ```
@@ -82,7 +89,7 @@ shortComment = [
 ]
 ```
 
-### note
+### Note
 To comment for your own, starting with `#`
 
 ```
@@ -94,10 +101,10 @@ shortComment = [# The pound sign precedes the thesaurus, followed by the pound s
 ]
 ```
 
-### A component is used more than once
+### If You Want to Use the Component More than Once
 There are two cases when one component is used more than once in a sentence.
 
-#### Hope that the last one and the previous one is consistent
+#### Hope that the Last One and the Previous One is Consistent   
 A bit similar to the concept of "pronoun", as long as the name is kept the same.  
 E.g:
 
@@ -108,7 +115,7 @@ shortComment = [
 ]
 ```
 
-#### Hope the last one is different from the previous one
+#### Hope the Last One is Different from the Previous One
 In this case, you need to add a number after the name of the subsequent components to distinguish, for example
 
 ```
@@ -118,8 +125,9 @@ shortComment = [
 ]
 ```
 
-## Advanced extension of lexicon
-### empty component
+## Advanced Extension of Lexicon
+
+### Empty Component
 For the sake of nature, some components may need to be populated as ** empty **, you need to use `'_'`, do not use`''`.
 E.g:
 
@@ -133,7 +141,8 @@ symbol = [
 ]
 ```
 
-### Custom weight
+### Custom Weight
+
 In order to be more natural and achieve better results, the probability of different content in the component may be different, at this time can be resolved by custom weights.  
 Grammar is as follows:
 
@@ -179,7 +188,7 @@ This will be more troublesome, there are three steps:
 * Add a description of the relationship between the constraints
 * Describe the relationship between the descriptive information recorded in the component library
 
-#### Add a property for each of the two related components
+#### Add a Property for Each of the Two Related Components
 
 Grammar is as follows:
 
@@ -210,7 +219,7 @@ lexicon = {
 }
 ```
 
-#### Add a description of the constraints
+#### Add a Description of the Constraints
 Assuming that the names of the two component libraries are lexicon1 and lexicon2 respectively, the description table created needs to be named lexicon1VSlexicon2.
 The contents of the table are as follows:
 
@@ -222,7 +231,7 @@ lexicon1VSlexicon2 = [
 ]
 ```
 
-#### Describe the relationship between the descriptive table information in the component library
+#### Describe the Relationship Between the Descriptive Table Information in the Component Library
 Need to increase in the conditions section of lexicon1: `'lexicon2': 'lexicon1VSlexicon2'`  
 At the same time in the conditions section lexicon2 increase: `'lexicon1': 'lexicon1VSlexicon2'`
 
@@ -275,7 +284,7 @@ deviceVSPlaceInHome = {
 
 ```
 
-### Constraints with weight
+### Constraints with Weight
 We still take {device} as an example, add the probabilities to the property and wrap the property and probabily in square brackets.  
 Example:
 
